@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head> 
+  <meta charset="utf-8"> 
+  <title>test</title> 
+  <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+  <style type="text/css" media="all">
+
+    .controlBtns {
+      margin-left: 10px;
+      /*margin-bottom: 10px*/
+    }
+
+    .form-horizontal .equip-notes {
+      margin-left: 10px;
+      width: 95%;
+      height: 300px
+    }
+
+  </style>
+
+  <!--<script src="js/bootstrap.min.js"></script>-->
+  <script src="js/jquery.min.js"></script>
+  <script src="js/jquery.deserialize.js"></script>  
+
+  <script>
+    function serializeForms(){
+      localStorage.setItem("eqipForm", $("#eqipForm").serialize())
+    }
+
+    function deserializeForms(){
+      $("#eqipForm").deserialize(localStorage.getItem("eqipForm"));
+    }
+
+    var time = 5000; 
+    var activityTimer = setTimeout(inActive, time); 
+
+    function inActive() {
+        serializeForms();
+        clearTimeout(activityTimer);
+        activityTimer = setTimeout(inActive, time);
+    }
+
+    function toMain(){
+      serializeForms();
+      document.location.replace('index.html');
+    }
+
+    $(document).ready(function(){
+      deserializeForms();
+
+      $("#saveBtn").click(function(){
+        serializeForms();
+      });
+
+      $("#loadBtn").click(function(){
+        deserializeForms();
+      });
+    });
+  </script>
+
+</head>
+<body>
+
+  <ul class="nav nav-tabs">
+    <li><a href="#" onclick="toMain()">Персонаж</a></li>
+    <li class="active">
+      <a href="#">Шмотник</a>
+    </li>
+  </ul>
+
+
+  <form class="form-horizontal" id="eqipForm">
+    <fieldset>
+      <div class="control-group">
+        <textarea class="equip-notes" name="textEquip"> </textarea>
+      </div>
+      <div class="controlBtns">
+        <button class="btn" type="button" id="saveBtn">Save</button>
+        <button class="btn" type="button" id="loadBtn">Load</button>
+      </div>
+    </fieldset>
+  </form>
+
+
+
+
+
+</body></html>

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head> 
+  <meta charset="utf-8"> 
+  <title>test</title> 
+  <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+  <style type="text/css" media="all">
+    .attribs span.add-on,
+    .basics input,
+    .stats input,
+    .attribs input {
+      margin-top: 5px;
+    }
+
+    .stats input {
+      width: 100px;
+    }
+
+    .attribs input {
+      width: 40px;
+    }
+
+    .input-prepend .add-on {
+      width: 35px;
+    }
+
+    .form-horizontal .attribs .controls {
+      margin-left: 180px;
+    }
+
+    .controlBtns {
+      margin-left: 10px;
+      /*margin-bottom: 10px*/
+    }
+
+    .lead {
+      margin-left: 10px;
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+
+    .form-horizontal .special-notes,
+    .form-horizontal .abils {
+      margin-left: 10px;
+      width: 90%;
+      height: 200px
+    }
+
+
+    .basics {
+      margin-top: 0px;
+    }
+  </style>
+
+  <!--<script src="js/bootstrap.min.js"></script>-->
+  <script src="js/jquery.min.js"></script>
+  <script src="js/jquery.deserialize.js"></script>  
+
+  <script>
+    function serializeForms(){
+      localStorage.setItem("basicAttribsForm", $("#basicAttribsForm").serialize())
+      localStorage.setItem("abilForm", $("#abilForm").serialize())
+      localStorage.setItem("specForm", $("#specForm").serialize())
+    }
+
+    function deserializeForms(){
+      $("#basicAttribsForm").deserialize(localStorage.getItem("basicAttribsForm"));
+      $("#abilForm").deserialize(localStorage.getItem("abilForm"));
+      $("#specForm").deserialize(localStorage.getItem("specForm"));
+    }
+
+    function toEquip(){
+      serializeForms();
+      document.location.replace('equip.html');
+    }
+
+    var time = 10000; 
+    var activityTimer = setTimeout(inActive, time); 
+
+    function inActive() {
+        serializeForms();
+        clearTimeout(activityTimer);
+        activityTimer = setTimeout(inActive, time);
+    }
+
+    $(document).ready(function(){
+      deserializeForms();
+
+      $("#saveBtn").click(function(){
+        serializeForms();
+      });
+
+      $("#loadBtn").click(function(){
+        deserializeForms();
+      });
+    });
+  </script>
+
+</head>
+<body>
+
+
+
+  <ul class="nav nav-tabs">
+    <li class="active">
+      <a href="#">Персонаж</a>
+    </li>
+    <li><a href="#" onclick="toEquip()">Шмотник</a></li>
+  </ul>
+
+
+  <!-- <legend>Персонаж</legend> -->
+  <div class="row-fluid">
+    <form class="form-horizontal" id="basicAttribsForm">
+      
+      <div class="span6">
+        <div class="basics">
+          <div class="control-group">
+            <label class="control-label" for="inputName">Имя</label>
+            <div class="controls">
+              <input type="text" name="inputName">
+            </div>
+            <label class="control-label" for="inputRace">Расса</label>
+            <div class="controls">
+              <input type="text" name="inputRace">
+            </div>
+            <label class="control-label" for="inputClass">Класс</label>
+            <div class="controls">
+              <input type="text" name="inputClass">
+            </div>
+            <label class="control-label" for="inputIdeology">Мировоззрение</label>
+            <div class="controls">
+              <input type="text" name="inputIdeology">
+            </div>
+            <label class="control-label" for="inputReligion">Религия</label>
+            <div class="controls">
+              <input type="text" name="inputReligion">
+            </div>
+          </div>
+        </div>
+
+        <div class="attribs">
+          <label class="control-label" for="inputSTR">Статы</label>
+          <div class="controls">
+            <div class="input-prepend">
+              <span class="add-on">STR</span>
+              <input class="input-mini" name="inputSTR" type="text">
+            </div>
+          </div>
+
+          <div class="controls">
+            <div class="input-prepend">
+              <span class="add-on">AGL</span>
+              <input class="input-mini" name="inputAGL" type="text">
+            </div>
+          </div>
+
+          <div class="controls">
+            <div class="input-prepend">
+              <span class="add-on">CON</span>
+              <input class="input-mini" name="inputCON" type="text">
+            </div>
+          </div>
+          
+          <div class="controls">
+            <div class="input-prepend">
+              <span class="add-on">INT</span>
+              <input class="input-mini" name="inputINT" type="text">
+            </div>
+          </div>
+          
+          <div class="controls">
+            <div class="input-prepend">
+              <span class="add-on">WIS</span>
+              <input class="input-mini" name="inputWIS" type="text">
+            </div>
+          </div>
+          
+          <div class="controls">
+            <div class="input-prepend">
+              <span class="add-on">CHR</span>
+              <input class="input-mini" name="inputCHR" type="text">
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="span6">
+        <div class="stats">
+          <div class="control-group">
+            <label class="control-label" for="inputLevel">Уровень</label>
+            <div class="controls">
+              <input type="text" name="inputLevel">
+            </div>
+            <label class="control-label" for="inputAC">Класс брони</label>
+            <div class="controls">
+              <input type="text" name="inputAC">
+            </div>
+            <label class="control-label" for="inputHP">Здоровье</label>
+            <div class="controls">
+              <input type="text" name="inputHP">
+            </div>
+            <label class="control-label" for="inputAttack">Атака</label>
+            <div class="controls">
+              <input type="text" name="inputAttack">
+            </div>
+            <label class="control-label" for="inputDamage">Урон</label>
+            <div class="controls">
+              <input type="text" name="inputDamage">
+            </div>
+            <label class="control-label" for="inputInit">Инициатива</label>
+            <div class="controls">
+              <input type="text" name="inputInit">
+            </div>
+            <label class="control-label" for="inputACount">Кол-во атак</label>
+            <div class="controls">
+              <input type="text" name="inputACount">
+            </div>
+            <label class="control-label" for="inputCrit">Шанс крита</label>
+            <div class="controls">
+              <input type="text" name="inputCrit">
+            </div>
+            <label class="control-label" for="inputSpeed">Скорость перемещения</label>
+            <div class="controls">
+              <input type="text" name="inputSpeed">
+            </div>
+            <label class="control-label" for="inputActions">Количество действий</label>
+            <div class="controls">
+              <input type="text" name="inputActions">
+            </div>
+            <label class="control-label" for="inputMagicDef">Магическая защита</label>
+            <div class="controls">
+              <input type="text" name="inputMagicDef">
+            </div>
+            <label class="control-label" for="inputExp">Опыт</label>
+            <div class="controls">
+              <input type="text" name="inputExp">
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </form>
+  </div>
+
+  <hr>
+
+  <div class="row-fluid">
+    <form class="form-horizontal" id="abilForm">
+      
+      <div class="span6">
+          <p class="lead">Мирные умения</p>
+          <div class="control-group">
+            <textarea class="abils" name="textPeace"></textarea>
+          </div>
+        </fieldset>
+      </div>
+      <div class="span6">
+        <fieldset>
+          <p class="lead">Боевые умения</p>
+          <div class="control-group">
+            <textarea class="abils" name="textBattle"></textarea>
+          </div>
+        </fieldset>
+      </div>
+    </form>
+  </div>
+
+
+  <div class="row-fluid">
+    <form class="form-horizontal" id="specForm">
+      <fieldset>
+        <div class="span6">
+          <p class="lead">Специальные пометки</p>
+          <div class="control-group">
+            <textarea class="special-notes" name="textSpecial"> </textarea>
+          </div>
+
+          <div class="controlBtns">
+            <button class="btn" type="button" id="saveBtn">Save</button>
+            <button class="btn" type="button" id="loadBtn">Load</button>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+
+</body>
+</html>
